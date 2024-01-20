@@ -42,5 +42,5 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         git config --local core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
         git commit -m "版本更新"
-        git add .
+        git add version.json
         git push
