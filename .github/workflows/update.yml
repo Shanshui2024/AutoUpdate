@@ -20,7 +20,7 @@ jobs:
     - name: 确认用户账户
       run: |
         git config --global user.email "shanshui2024@github.com"
-        git config --global user.name "A67"
+        git config --global user.name "Auto Update"
     - name: 确定版本号和新版本号
       id: determine_version
       run: |
