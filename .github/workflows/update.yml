@@ -1,10 +1,8 @@
 name: Build and Deploy
-
 on:
   push:
     branches:
       - main
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -26,7 +24,6 @@ jobs:
             echo "已创建版本文件，当前版本："
             cat version.json
           fi
-
       - name: 确认用户账户
         run: |
           git config --global user.email "shanshui2024@github.com"
@@ -37,17 +34,15 @@ jobs:
         run: |
           python determine_version.py
         working-directory: .
-        
+
       - name: 更新版本
         run: |
           echo "正在更新版本信息..."
           sed -i -e 's/"version": ".*"/"version": "'${{ steps.determine_version.outputs.new_version }}'"/' version.json
-
       - name: 显示版本
         run: |
           echo "当前版本号：${{ steps.determine_version.outputs.current_version }}"
           echo "新版本号：${{ steps.determine_version.outputs.new_version }}"
-
       - name: 提交更改
         run: |
           git add .
