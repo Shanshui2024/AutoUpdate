@@ -31,22 +31,17 @@ jobs:
         run: |
           git config --global user.email "shanshui2024@github.com"
           git config --global user.name "Auto Update"
-
+        
       - name: 确定版本号和新版本
         id: determine_version
         run: |
-          current_version=$(python determine_version.py current)
-          new_version=$(python determine_version.py new)
-          echo "::set-output name=current_version::${current_version}"
-          echo "::set-output name=new_version::${new_version}"
-        env:
-          PYTHON_VERSION: ${{ matrix.python-version }}
+          python determine_version.py
         working-directory: .
-
+        
       - name: 更新版本
         run: |
           echo "正在更新版本信息..."
-          sed -i 's/"version": ".*"/"version": "'${{ steps.determine_version.outputs.new_version }}'"/' version.json
+          sed -i -e 's/"version": ".*"/"version": "'${{ steps.determine_version.outputs.new_version }}'"/' version.json
 
       - name: 显示版本
         run: |
@@ -60,4 +55,3 @@ jobs:
           new_version=${{ steps.determine_version.outputs.new_version }}
           git commit -m "版本更新：${current_version} -> ${new_version}"
           git push
-
