@@ -32,7 +32,7 @@ jobs:
 
     - name: 提交更改
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.自动更新 }}
+        SSH_PRIVATE_KEY: ${{ secrets.UPDATE }}
       run: |
         mkdir -p ~/.ssh
         echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
