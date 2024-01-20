@@ -31,6 +31,8 @@ jobs:
       run: |
         echo "正在更新版本信息..."
         sed -i 's/"version": ".*"/"version": "${{ steps.determine_version.outputs.version }}"/' version.json
+    - name: 显示状态
+      run: git status
 
     - name: 提交更改
       env:
