@@ -1,7 +1,7 @@
 import json
 
 def determine_version():
-    with open('version.json', 'r') as file:
+    with open('../version.json', 'r') as file:
         data = json.load(file)
         current_version = data['version']
         # 执行版本更新计算逻辑
