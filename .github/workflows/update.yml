@@ -32,8 +32,8 @@ jobs:
 
     - name: Commit changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "版本更新"
+        git config --local user.email "Shanshui2024@github.com"
+        git config --local user.name "Shanshui2024"
         git add .
         git commit -m "更新版本"
         git push
