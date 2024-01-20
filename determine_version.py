@@ -1,14 +1,13 @@
 import json
 
-# 读取JSON文件
-with open('version.json') as json_file:
-    data = json.load(json_file)
-    version = data.get('version', '0.0.0')
+def determine_version():
+    with open('version.json', 'r') as file:
+        data = json.load(file)
+        current_version = data['version']
+        # 执行版本更新计算逻辑
+        parts = current_version.split('.')
+        new_version = f"{parts[0]}.{parts[1]}.{int(parts[2])+1}"
+        return new_version
 
-# 版本号递增逻辑，例如自动增加最后一位
-version_parts = version.split('.')
-version_parts[-1] = str(int(version_parts[-1]) + 1)
-new_version = '.'.join(version_parts)
-
-# 输出新版本号供后续步骤使用
+new_version = determine_version()
 print(new_version)
