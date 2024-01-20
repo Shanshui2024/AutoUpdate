@@ -29,7 +29,7 @@ jobs:
         echo "::set-output name=version::${version}"
     - name: 更新版本
       run: |
-        echo "正在更新版本信息..."
+        echo "正在更新版本信息......"
         sed -i 's/"version": ".*"/"version": "${{ steps.determine_version.outputs.version }}"/' version.json
 
     - name: 提交更改
