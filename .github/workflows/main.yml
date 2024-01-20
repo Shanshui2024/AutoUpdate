@@ -55,6 +55,6 @@ jobs:
         new_version=$(cat version.json | jq -r .version)
         git add version.json
         git diff --cached --exit-code --quiet || (
-          git commit -m "版本更新：${current_version} -> ${new_version}"
+          git commit -m "版本更新：-> ${new_version}"
           git push
         )
