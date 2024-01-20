@@ -51,7 +51,7 @@ jobs:
       - name: 提交更改
         run: |
           git add .
-          current_version=${{ steps.determine_version.outputs.current_version }}
-          new_version=${{ steps.determine_version.outputs.new_version }}
+          current_version="${{ steps.determine_version.outputs.current_version }}"
+          new_version="${{ steps.determine_version.outputs.new_version }}"
           git commit -m "版本更新：${current_version} -> ${new_version}"
           git push
