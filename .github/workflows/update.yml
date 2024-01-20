@@ -17,7 +17,10 @@ jobs:
         if [ ! -f your_json_file.json ]; then
           echo "{\"version\": \"2.1.0\"}" > version.json
         fi
-
+    - name: Configure Git user
+      run: |
+        git config --global user.email "autoload@github.com"
+        git config --global user.name "Auto Actions"
     - name: 确定版本号和新版本号
       id: determine_version
       run: |
