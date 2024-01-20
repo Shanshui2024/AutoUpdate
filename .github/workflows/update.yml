@@ -30,10 +30,14 @@ jobs:
         echo "正在更新版本信息..."
         sed -i 's/"version": ".*"/"version": "${{ steps.determine_version.outputs.version }}"/' version.json
 
-    - name: Commit changes
+    - name: 提交更改
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.自动更新 }}
       run: |
-        git config --local user.email "Shanshui2024@github.com"
-        git config --local user.name "Shanshui2024"
+        mkdir -p ~/.ssh
+        echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        git config --local core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
         git add .
-        git commit -m "更新版本"
+        git commit -m "版本更新"
         git push
