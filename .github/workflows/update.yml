@@ -17,17 +17,16 @@ jobs:
         if [ ! -f your_json_file.json ]; then
           echo "{\"version\": \"2.1.0\"}" > version.json
         fi
-    # - name: Configure Git user
-    #   run: |
-    #     git config --global user.email "shanshui2024@github.com"
-    #     git config --global user.name "Shanshui2024"
+    - name: Configure Git user
+      run: |
+        git config --global user.email "shanshui2024@github.com"
+        git config --global user.name "Shanshui2024"
     - name: 确定版本号和新版本号
       id: determine_version
       run: |
         # 在此处编写Python脚本或使用其他方法来确定新版本号
         version=$(python determine_version.py)
         echo "::set-output name=version::${version}"
-      
     - name: 更新版本
       run: |
         echo "正在更新版本信息..."
