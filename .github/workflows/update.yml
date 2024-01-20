@@ -50,7 +50,7 @@ jobs:
 
       - name: 提交更改
         run: |
-          git add version.json
-          version=$(python determine_version/determine_version.py)
+          git add .
+          version=$(python determine_version.py)
           git commit -m "版本更新：$version"
           git push
