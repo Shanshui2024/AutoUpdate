@@ -32,17 +32,18 @@ jobs:
         git config --global user.email "shanshui2024@github.com"
         git config --global user.name "Auto Update"
 
-    - name: 确定版本号和新版本号
+    - name: 确定版本号和新版本
       id: determine_version
       run: |
-        # 在此处编写Python脚本或使用其他方法来确定新版本号
-        version=$(python determine_version.py)
-        echo "::set-output name=version::${version}"
+        current_version=$(. determine_version.py; echo $current_version)
+        new_version=$(. determine_version.py; echo $new_version)
+        echo "::set-output name=current_version::${current_version}"
+        echo "::set-output name=new_version::${new_version}"
 
     - name: 更新版本
       run: |
         echo "正在更新版本信息..."
-        sed -i 's/"version": ".*"/"version": "${{ steps.determine_version.outputs.version }}"/' version.json
+        sed -i 's/"version": ".*"/"version": "'${{ steps.determine_version.outputs.new_version }}'"/' version.json
 
     - name: 显示状态
       run: git status
@@ -55,8 +56,8 @@ jobs:
         echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         git config --local core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-        current_version=$(cat version.json | jq -r .version)
-        new_version=$(cat version.json | jq -r .version)
+        current_version=${{ steps.determine_version.outputs.current_version }}
+        new_version=${{ steps.determine_version.outputs.new_version }}
         git add version.json
         git diff --cached --exit-code --quiet || (
           git commit -m "版本更新：${current_version} -> ${new_version}"
