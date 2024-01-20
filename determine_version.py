@@ -6,6 +6,7 @@ def determine_version():
         current_version = data['version']
         # 执行版本更新计算逻辑
         parts = current_version.split('.')
+        print(parts)  # 打印 parts 列表内容，用于调试
         new_version = f"{parts[0]}.{parts[1]}.{int(parts[2])+1}"
         return current_version, new_version
 
