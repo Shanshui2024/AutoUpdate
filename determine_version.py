@@ -1,7 +1,7 @@
 import json
 
 # 读取JSON文件
-with open('your_json_file.json') as json_file:
+with open('version.json') as json_file:
     data = json.load(json_file)
     version = data.get('version', '0.0.0')
 
