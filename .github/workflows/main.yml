@@ -22,9 +22,11 @@ jobs:
           cat ./.github/version.json
         else
           echo "版本文件不存在，创建版本文件..."
+          cd ./.github
           echo "{\"version\": \"2.1.0\"}" > ./.github/version.json
           echo "已创建版本文件，当前版本："
-          cat ./.github/version.json
+          cat ./version.json
+          cd ..
         fi
     - name: 确认用户账户
       run: |
@@ -53,7 +55,7 @@ jobs:
         git config --local core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
         current_version=$(cat ./.github/version.json | jq -r .version)
         new_version=$(cat ./.github/version.json | jq -r .version)
-        git add version.json
+        git add *
         git diff --cached --exit-code --quiet || (
           git commit -m "版本更新：-> ${new_version}"
           git push
