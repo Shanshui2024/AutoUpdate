@@ -23,7 +23,7 @@ jobs:
         else
           echo "版本文件不存在，创建版本文件..."
           cd ./.github
-          echo "{\"version\": \"2.1.0\"}" > ./.github/version.json
+          echo "{\"version\": \"2.1.0\"}" > version.json
           echo "已创建版本文件，当前版本："
           cat ./version.json
           cd ..
